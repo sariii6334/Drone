@@ -499,6 +499,20 @@ export function buildEnvironment(scene: THREE.Scene): EnvironmentData {
     buildingPos.z - 0.5
   );
 
+  // 8. Build a road curve running along the highway centerline, matching the same
+  // angle/position used by the road mesh and convoy path above. Other modules
+  // (e.g. ConvoyManager) receive this curve, so it must be defined before returning.
+  const roadCurvePoints: THREE.Vector3[] = [];
+  const curveRoadLen = 1200;
+  const numCurvePoints = 20;
+  const roadCurveFwd = new THREE.Vector3(-Math.sin(-Math.PI * 0.21), 0, -Math.cos(-Math.PI * 0.21)).normalize();
+  const roadCurveCenter = new THREE.Vector3(40, 0.35, -50);
+  for (let i = 0; i <= numCurvePoints; i++) {
+    const t = (i / numCurvePoints - 0.5) * curveRoadLen;
+    roadCurvePoints.push(roadCurveCenter.clone().addScaledVector(roadCurveFwd, t));
+  }
+  const roadCurve = new THREE.CatmullRomCurve3(roadCurvePoints);
+
   return {
     scene,
     roadCurve,
