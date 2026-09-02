@@ -1,0 +1,6 @@
+{
+  "name": "FPV Drone Desert Strike",
+  "description": "Realistic 3D FPV Drone Tactical Recon & Convoy Strike Simulator with paved highway, military convoy, concrete observation post, and precise aiming physics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
