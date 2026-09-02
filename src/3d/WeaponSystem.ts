@@ -408,6 +408,8 @@ export class WeaponSystem {
   ): { newPos: THREE.Vector3; newRot: THREE.Euler; speed: number; highCamPos?: THREE.Vector3 } | null {
     if (!this.strikeState.isDiving) return null;
 
+    const activeVehicles = this.convoyManager.convoyVehicles.filter((v) => !v.isDestroyed);
+
     this.strikeState.diveTime += deltaTime;
     this.strikeState.diveSpeed = Math.min(90, this.strikeState.diveSpeed + 12 * deltaTime);
 
@@ -519,4 +521,3 @@ export class WeaponSystem {
     };
   }
 }
-
